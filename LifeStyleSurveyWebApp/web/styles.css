@@ -1,0 +1,126 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body and layout */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  padding: 30px;
+  border: 1px solid #000;
+  max-width: 1000px;
+  margin: 30px auto;
+}
+
+/* Header and nav */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.nav-container h1 {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.nav-links {
+  display: flex;
+}
+
+.nav-links a {
+  margin-left: 20px;
+}
+
+.nav-links a:first-child {
+  margin-left: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #000;
+}
+
+.nav-links a:first-child {
+  color: #5eb3ff;
+}
+
+/* Form layout */
+form {
+  display: block;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+table, th, td {
+  border: 1px solid #5eb3ff;
+}
+
+th {
+  background-color: #ccc;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+}
+
+td {
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="date"] {
+  border: 1px solid #5eb3ff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 14px;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #5eb3ff;
+}
+
+/* Labels */
+p {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+/* Submit button */
+input[type="submit"] {
+  background-color: #5eb3ff;
+  color: #fff;
+  border: none;
+  padding: 10px 25px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+input[type="submit"]:hover {
+  background-color: #3399ff;
+}
+
+/* Responsive tweak */
+@media (max-width: 600px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
