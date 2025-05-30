@@ -6,11 +6,111 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Landing Page</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        <div>
+            <h1>_Surveys</h1>
+            
+            <p><a href="index.html">FILL OUT SURVEY</a></p>
+            <p><a href="view_survey_results.jsp">FILL OUT SURVEY</a></p>
+            <p><a>VIEW SURVEY RESULTS</a></p>
+            <form action="SubmitSurveyServlet" method="POST">
+                
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Personal Details</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Full Names</td>
+                            <td><input type="text" name="fullNames" placeholder="Full Names" required=""></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><input type="email" name="personalEmial" placeholder="example@gmail.com" required=""></td>
+                        </tr>
+                        <tr>
+                            <td>Date of Birth</td>
+                            <td><input type="date" name="dob" required=""></td>
+                        </tr>
+                        <tr>
+                            <td>Contact Number</td>
+                            <td><input type="text" name="contactNumber" placeholder="Contact Number" required=""></td>
+                        </tr>
+                        
+                         <tr>
+                            <td>What is your favorite food ?</td>
+                            <td>
+                                <input type="checkbox" name="favorite_food" value="pizza"> Pizza
+                                <input type="checkbox" name="favorite_food" value="sushi"> Pasta
+                                <input type="checkbox" name="favorite_food" value="burger"> Pap and Wors
+                                <input type="checkbox" name="favorite_food" value="salad">  Other
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                
+                <p>Please rate you level of agreement on scale from 1 to 5,with 1 being "strongly agree" and 5 being "strongly disagree"</p>
+                
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Criteria</th>
+                            <th>Strongly Agree       </th>
+                            <th>Agree               </th>
+                            <th>Neutral             </th>
+                            <th>Disagree          </th>
+                            <th>Strongly Disagree</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>I like to watch movies</td>
+                            <td><input type="radio" name="movies" value="Strongly Agree"></td>
+                            <td><input type="radio" name="movies" value="Agree"></td>
+                            <td><input type="radio" name="movies" value="Neutral"></td>
+                            <td><input type="radio" name="movies" value="Disagree"></td>
+                            <td><input type="radio" name="movies" value="Strongly Disagree"></td>
+                        </tr>
+                        <tr>
+                            <td>I like to listen radio</td>
+                            <td><input type="radio" name="radio" value="Strongly Agree"></td>
+                            <td><input type="radio" name="radio" value="Agree"></td>
+                            <td><input type="radio" name="radio" value="Neutral"></td>
+                            <td><input type="radio" name="radio" value="Disagree"></td>
+                            <td><input type="radio" name="radio" value="Strongly Disagree"></td>
+                        </tr>
+                        <tr>
+                            <td>I like to eat out</td>
+                            <td><input type="radio" name="movies" value="Strongly Agree"></td>
+                            <td><input type="radio" name="movies" value="Agree"></td>
+                            <td><input type="radio" name="movies" value="Neutral"></td>
+                            <td><input type="radio" name="movies" value="Disagree"></td>
+                            <td><input type="radio" name="movies" value="Strongly Disagree"></td>
+                        </tr>
+                        <tr>
+                            <td>I like to watch TV</td>
+                            <td><input type="radio" name="eatOut" value="Strongly Agree"></td>
+                            <td><input type="radio" name="eatOut" value="Agree"></td>
+                            <td><input type="radio" name="eatOut" value="Neutral"></td>
+                            <td><input type="radio" name="eatOut" value="Disagree"></td>
+                            <td><input type="radio" name="eatOut" value="Strongly Disagree"></td>
+                        </tr>
+                        
+                        <tr>
+                            <td><input type="submit" name="submit" value="SUBMIT"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </form>
+        </div>
     </body>
 </html>
