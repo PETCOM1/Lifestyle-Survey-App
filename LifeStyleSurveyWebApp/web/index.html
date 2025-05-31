@@ -1,125 +1,165 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Landing Page</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <div class="nav-container">
-            <h1>_Surveys</h1>
-            <div class="nav-links">
-                <a href="index.html">FILL OUT SURVEY</a>
-                <a href="ViewResultsServlet">VIEW SURVEY RESULTS</a>
-            </div>
+<head>
+    <title>Landing Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #success-popup {
+            display: none;
+            background-color: #ccffcc;
+            color: #2e7d32;
+            border: 1px solid #2e7d32;
+            padding: 10px;
+            margin: 10px auto;
+            width: fit-content;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        #error-popup {
+            display: none;
+            background-color: #ffdddd;
+            color: #a94442;
+            border: 1px solid #a94442;
+            padding: 6px 10px;
+            margin-top: 8px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-container">
+        <h1>_Surveys</h1>
+        <div class="nav-links">
+            <a href="index.html">FILL OUT SURVEY</a>
+            <a href="ViewResultsServlet">VIEW SURVEY RESULTS</a>
         </div>
+    </div>
 
-        <div id="success-popup">Survey submitted successfully!</div>
-        <form action="ProcessSurvey" method="POST">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Personal Details</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Full Names</td>
-                        <td><input type="text" name="fullNames" placeholder="Full Names" required></td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td><input type="email" name="personalEmial" placeholder="example@gmail.com" required></td>
-                    </tr>
-                    <tr>
-                        <td>Date of Birth</td>
-                        <td><input type="date" name="dob" required></td>
-                    </tr>
-                    <tr>
-                        <td>Contact Number</td>
-                        <td><input type="text" name="contactNumber" placeholder="Contact Number" required></td>
-                    </tr>
-                    <tr>
-                        <td>What is your favorite food?</td>
-                        <td>
-                            <input type="checkbox" name="favoriteFood" value="Pizza"> Pizza
-                            <input type="checkbox" name="favoriteFood" value="Pasta"> Pasta
-                            <input type="checkbox" name="favoriteFood" value="PapNWors"> Pap and Wors
-                            <input type="checkbox" name="favoriteFood" value="Other"> Other
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <div id="success-popup">Survey submitted successfully!</div>
 
-            <p>Please rate your level of agreement on a scale from 1 to 5, with 1 being "strongly agree" and 5 being "strongly disagree"</p>
+    <form action="ProcessSurvey" method="POST">
+        <table>
+            <thead>
+                <tr>
+                    <th>Personal Details</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Full Names</td>
+                    <td><input type="text" name="fullNames" placeholder="Full Names" required></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="email" name="personalEmial" placeholder="example@gmail.com" required></td>
+                </tr>
+                <tr>
+                    <td>Date of Birth</td>
+                    <td><input type="date" name="dob" required></td>
+                </tr>
+                <tr>
+                    <td>Contact Number</td>
+                    <td><input type="text" name="contactNumber" placeholder="Contact Number" required></td>
+                </tr>
+                <tr>
+                    <td>What is your favorite food?</td>
+                    <td>
+                        <input type="checkbox" name="favoriteFood" value="Pizza"> Pizza
+                        <input type="checkbox" name="favoriteFood" value="Pasta"> Pasta
+                        <input type="checkbox" name="favoriteFood" value="PapNWors"> Pap and Wors
+                        <input type="checkbox" name="favoriteFood" value="Other"> Other
+                        <div id="error-popup">Please select at least one favorite food.</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Criteria</th>
-                        <th>Strongly Agree</th>
-                        <th>Agree</th>
-                        <th>Neutral</th>
-                        <th>Disagree</th>
-                        <th>Strongly Disagree</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>I like to watch movies</td>
-                        <td><input type="radio" name="movies" value="1" required></td>
-                        <td><input type="radio" name="movies" value="2"></td>
-                        <td><input type="radio" name="movies" value="3"></td>
-                        <td><input type="radio" name="movies" value="4"></td>
-                        <td><input type="radio" name="movies" value="5"></td>
-                    </tr>
-                    <tr>
-                        <td>I like to listen to the radio</td>
-                        <td><input type="radio" name="radio" value="1" required></td>
-                        <td><input type="radio" name="radio" value="2"></td>
-                        <td><input type="radio" name="radio" value="3"></td>
-                        <td><input type="radio" name="radio" value="4"></td>
-                        <td><input type="radio" name="radio" value="5"></td>
-                    </tr>
-                    <tr>
-                        <td>I like to eat out</td>
-                        <td><input type="radio" name="eatOut" value="1" required></td>
-                        <td><input type="radio" name="eatOut" value="2"></td>
-                        <td><input type="radio" name="eatOut" value="3"></td>
-                        <td><input type="radio" name="eatOut" value="4"></td>
-                        <td><input type="radio" name="eatOut" value="5"></td>
-                    </tr>
-                    <tr>
-                        <td>I like to watch TV</td>
-                        <td><input type="radio" name="tv" value="1" required></td>
-                        <td><input type="radio" name="tv" value="2"></td>
-                        <td><input type="radio" name="tv" value="3"></td>
-                        <td><input type="radio" name="tv" value="4"></td>
-                        <td><input type="radio" name="tv" value="5"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="6"><input type="submit" value="SUBMIT"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
+        <p>Please rate your level of agreement on a scale from 1 to 5, with 1 being "strongly agree" and 5 being "strongly disagree"</p>
 
-        <!-- ✅ Success Popup Script -->
-        <script>
-  window.onload = function () {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('success') === 'true') {
-      const popup = document.getElementById('success-popup');
-      popup.style.display = 'block';
-      setTimeout(() => {
-        popup.style.display = 'none';
-      }, 4000); // Hide after 4 seconds
-    }
-  };
-</script>
+        <table>
+            <thead>
+                <tr>
+                    <th>Criteria</th>
+                    <th>Strongly Agree</th>
+                    <th>Agree</th>
+                    <th>Neutral</th>
+                    <th>Disagree</th>
+                    <th>Strongly Disagree</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>I like to watch movies</td>
+                    <td><input type="radio" name="movies" value="1" required></td>
+                    <td><input type="radio" name="movies" value="2"></td>
+                    <td><input type="radio" name="movies" value="3"></td>
+                    <td><input type="radio" name="movies" value="4"></td>
+                    <td><input type="radio" name="movies" value="5"></td>
+                </tr>
+                <tr>
+                    <td>I like to listen to the radio</td>
+                    <td><input type="radio" name="radio" value="1" required></td>
+                    <td><input type="radio" name="radio" value="2"></td>
+                    <td><input type="radio" name="radio" value="3"></td>
+                    <td><input type="radio" name="radio" value="4"></td>
+                    <td><input type="radio" name="radio" value="5"></td>
+                </tr>
+                <tr>
+                    <td>I like to eat out</td>
+                    <td><input type="radio" name="eatOut" value="1" required></td>
+                    <td><input type="radio" name="eatOut" value="2"></td>
+                    <td><input type="radio" name="eatOut" value="3"></td>
+                    <td><input type="radio" name="eatOut" value="4"></td>
+                    <td><input type="radio" name="eatOut" value="5"></td>
+                </tr>
+                <tr>
+                    <td>I like to watch TV</td>
+                    <td><input type="radio" name="tv" value="1" required></td>
+                    <td><input type="radio" name="tv" value="2"></td>
+                    <td><input type="radio" name="tv" value="3"></td>
+                    <td><input type="radio" name="tv" value="4"></td>
+                    <td><input type="radio" name="tv" value="5"></td>
+                </tr>
+                <tr>
+                    <td colspan="6"><input type="submit" value="SUBMIT"></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
 
+    <!-- ✅ Popup Scripts -->
+    <script>
+        // Success message display
+        window.onload = function () {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('success') === 'true') {
+                const popup = document.getElementById('success-popup');
+                popup.style.display = 'block';
+                setTimeout(() => {
+                    popup.style.display = 'none';
+                }, 4000);
+            }
+        };
 
-    </body>
+        // Favorite food validation
+        document.querySelector("form").addEventListener("submit", function(event) {
+            const foodChecked = document.querySelectorAll('input[name="favoriteFood"]:checked');
+            const errorPopup = document.getElementById("error-popup");
+
+            if (foodChecked.length === 0) {
+                errorPopup.style.display = "block";
+                errorPopup.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                event.preventDefault();
+                setTimeout(() => {
+                    errorPopup.style.display = "none";
+                }, 4000);
+            }
+        });
+    </script>
+</body>
 </html>

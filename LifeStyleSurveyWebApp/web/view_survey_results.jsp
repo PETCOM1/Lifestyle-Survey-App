@@ -23,37 +23,33 @@
                 Integer oldest = (Integer)request.getAttribute("oldest");
                 Integer youngest = (Integer)request.getAttribute("youngest");
                 
-                
                 Double percPizza = (Double)request.getAttribute("percPizza");
                 Double perPasta = (Double)request.getAttribute("perPasta");
                 Double percPapNWors = (Double)request.getAttribute("percPapNWors");
-                
                 
                 Double perLikeMovies = (Double)request.getAttribute("perLikeMovies");
                 Double perLikeRadio = (Double)request.getAttribute("perLikeRadio");
                 Double perLikeEatOut = (Double)request.getAttribute("perLikeEatOut");
                 Double perLikeWatchTv = (Double)request.getAttribute("perLikeWatchTv");
-                
-
         %>
 
         <table>
             <tbody>
                 <tr>
                     <td>Total number of survey:</td>
-                    <td><%=totalNumberOfSurvays%></td>
+                    <td><%= totalNumberOfSurvays %></td>
                 </tr>
                 <tr>
                     <td>Average Age:</td>
-                    <td><%=avarageAge%></td>
+                    <td><%= (avarageAge != null) ? Math.round(avarageAge) : "N/A" %></td>
                 </tr>
                 <tr>
                     <td>Oldest person who participated in survey</td>
-                    <td><%=oldest%></td>
+                    <td><%= oldest %></td>
                 </tr>
                 <tr>
                     <td>Youngest person who participated in survey</td>
-                    <td><%=youngest%></td>
+                    <td><%= youngest %></td>
                 </tr>
             </tbody>
         </table>
@@ -62,15 +58,15 @@
             <tbody>
                 <tr>
                     <td>Percentage of people who like Pizza:</td>
-                    <td><%=percPizza%>%</td>
+                    <td><%= (percPizza != null) ? Math.round(percPizza) : 0 %>%</td>
                 </tr>
                 <tr>
                     <td>Percentage of people who like Pasta:</td>
-                    <td><%=perPasta%>%</td>
+                    <td><%= (perPasta != null) ? Math.round(perPasta) : 0 %>%</td>
                 </tr>
                 <tr>
                     <td>Percentage of people who like Pap and Wors:</td>
-                    <td><%=percPapNWors%>%</td>
+                    <td><%= (percPapNWors != null) ? Math.round(percPapNWors) : 0 %>%</td>
                 </tr>
             </tbody>
         </table>
@@ -78,20 +74,20 @@
         <table>
             <tbody>
                 <tr>
-                    <td>People who like to watch movies</td>
-                    <td><%=perLikeMovies%></td>
+                    <td>People who like to watch movies:</td>
+                    <td><%= (perLikeMovies != null) ? Math.round(perLikeMovies) : 0 %></td>
                 </tr>
                 <tr>
                     <td>People who like to listen to radio:</td>
-                    <td><%=perLikeRadio%></td>
+                    <td><%= (perLikeRadio != null) ? Math.round(perLikeRadio) : 0 %></td>
                 </tr>
                 <tr>
                     <td>People who like to eat out:</td>
-                    <td><%=perLikeEatOut%></td>
+                    <td><%= (perLikeEatOut != null) ? Math.round(perLikeEatOut) : 0 %></td>
                 </tr>
                 <tr>
                     <td>People who like to watch TV:</td>
-                    <td><%=perLikeWatchTv%></td>
+                    <td><%= (perLikeWatchTv != null) ? Math.round(perLikeWatchTv) : 0 %></td>
                 </tr>
             </tbody>
         </table>
