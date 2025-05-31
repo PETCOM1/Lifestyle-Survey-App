@@ -4,9 +4,17 @@
         <servlet-name>ProcessSurvey</servlet-name>
         <servlet-class>za.ac.tut.controller.ProcessSurvey</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewResultsServlet</servlet-name>
+        <servlet-class>za.ac.tut.controller.ViewResultsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProcessSurvey</servlet-name>
         <url-pattern>/ProcessSurvey</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewResultsServlet</servlet-name>
+        <url-pattern>/ViewResultsServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

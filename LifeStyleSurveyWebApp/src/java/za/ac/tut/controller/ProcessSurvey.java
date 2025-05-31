@@ -36,22 +36,22 @@ public class ProcessSurvey extends HttpServlet {
 private SurveyFacadeLocal surveyFacadeLocal;
 
 @Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
-    String fullNames = request.getParameter("fullNames");
-    String personalEmail = request.getParameter("personalEmial");
-    String dobStr = request.getParameter("dob");
-    String contactNumber = request.getParameter("contactNumber");
-    String favoriteFood = request.getParameter("favoriteFood");
+            String fullNames = request.getParameter("fullNames");
+            String personalEmail = request.getParameter("personalEmial");
+            String dobStr = request.getParameter("dob");
+            String contactNumber = request.getParameter("contactNumber");
+            String favoriteFood = request.getParameter("favoriteFood");
 
-    // Ratings
-    Integer movies = Integer.parseInt(request.getParameter("movies"));
-    Integer radio = Integer.parseInt(request.getParameter("radio"));
-    Integer eatOut = Integer.parseInt(request.getParameter("eatOut"));
-    Integer tv = Integer.parseInt(request.getParameter("tv"));
+            // Ratings
+            Integer movies = Integer.parseInt(request.getParameter("movies"));
+            Integer radio = Integer.parseInt(request.getParameter("radio"));
+            Integer eatOut = Integer.parseInt(request.getParameter("eatOut"));
+            Integer tv = Integer.parseInt(request.getParameter("tv"));
 
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     try {
       
@@ -77,7 +77,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         surveyFacadeLocal.create(survey);
 
         response.sendRedirect("index.html?success=true");
-;
+
 
 
     } catch (ParseException ex) {

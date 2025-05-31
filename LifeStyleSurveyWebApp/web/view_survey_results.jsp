@@ -11,29 +11,49 @@
             <h1>_Surveys</h1>
             <div class="nav-links">
                 <a href="index.html">FILL OUT SURVEY</a>
-                <a href="view_survey_results.jsp">VIEW SURVEY RESULTS</a>
+                <a href="ViewResultsServlet">VIEW SURVEY RESULTS</a>
             </div>
         </div>
 
         <h2>Survey Results</h2>
+        
+        <%
+                Integer totalNumberOfSurvays  = (Integer) request.getAttribute("totalNumberOfSurvays");
+                Double avarageAge = (Double)request.getAttribute("avarageAge");
+                Integer oldest = (Integer)request.getAttribute("oldest");
+                Integer youngest = (Integer)request.getAttribute("youngest");
+                
+                
+                Double percPizza = (Double)request.getAttribute("percPizza");
+                Double perPasta = (Double)request.getAttribute("perPasta");
+                Double percPapNWors = (Double)request.getAttribute("percPapNWors");
+                
+                
+                Double perLikeMovies = (Double)request.getAttribute("perLikeMovies");
+                Double perLikeRadio = (Double)request.getAttribute("perLikeRadio");
+                Double perLikeEatOut = (Double)request.getAttribute("perLikeEatOut");
+                Double perLikeWatchTv = (Double)request.getAttribute("perLikeWatchTv");
+                
+
+        %>
 
         <table>
             <tbody>
                 <tr>
                     <td>Total number of survey:</td>
-                    <td><%=0%></td>
+                    <td><%=totalNumberOfSurvays%></td>
                 </tr>
                 <tr>
                     <td>Average Age:</td>
-                    <td><%=0%></td>
+                    <td><%=avarageAge%></td>
                 </tr>
                 <tr>
                     <td>Oldest person who participated in survey</td>
-                    <td><%=0%></td>
+                    <td><%=oldest%></td>
                 </tr>
                 <tr>
                     <td>Youngest person who participated in survey</td>
-                    <td><%=0%></td>
+                    <td><%=youngest%></td>
                 </tr>
             </tbody>
         </table>
@@ -42,15 +62,15 @@
             <tbody>
                 <tr>
                     <td>Percentage of people who like Pizza:</td>
-                    <td><%=0%></td>
+                    <td><%=percPizza%></td>
                 </tr>
                 <tr>
                     <td>Percentage of people who like Pasta:</td>
-                    <td><%=0%></td>
+                    <td><%=perPasta%></td>
                 </tr>
                 <tr>
                     <td>Percentage of people who like Pap and Wors:</td>
-                    <td><%=0%></td>
+                    <td><%=percPapNWors%></td>
                 </tr>
             </tbody>
         </table>
@@ -59,19 +79,19 @@
             <tbody>
                 <tr>
                     <td>People who like to watch movies</td>
-                    <td><%=0%></td>
+                    <td><%=perLikeMovies%></td>
                 </tr>
                 <tr>
                     <td>People who like to listen to radio:</td>
-                    <td><%=0%></td>
+                    <td><%=perLikeRadio%></td>
                 </tr>
                 <tr>
                     <td>People who like to eat out:</td>
-                    <td><%=0%></td>
+                    <td><%=perLikeEatOut%></td>
                 </tr>
                 <tr>
                     <td>People who like to watch TV:</td>
-                    <td><%=0%></td>
+                    <td><%=perLikeWatchTv%></td>
                 </tr>
             </tbody>
         </table>

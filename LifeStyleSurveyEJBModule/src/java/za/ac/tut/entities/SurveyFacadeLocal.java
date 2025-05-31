@@ -28,5 +28,27 @@ public interface SurveyFacadeLocal {
     List<Survey> findRange(int[] range);
 
     int count();
+
+    double avarageAge();
+
+    Integer oldestPeron();
+
+    Integer youngestPerson();
+
+    double pizzaLikersPerc();
+    
+    double pastaLikersPerc();
+    
+    double papAndWorsLikersPerc();
+
+    void avgLikeMovies();
+    
+    double avgLikeMovie();
+    
+    double avgLikeRadio();
+    
+    double avgLikeEatOut();
+    
+    double avgLikeWatchTV();
     
 }
