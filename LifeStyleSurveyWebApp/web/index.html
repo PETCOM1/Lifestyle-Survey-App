@@ -15,7 +15,8 @@
             </div>
         </div>
 
-        <form action="SubmitSurveyServlet" method="POST">
+        <div id="success-popup">Survey submitted successfully!</div>
+        <form action="ProcessSurvey" method="POST">
             <table>
                 <thead>
                     <tr>
@@ -43,10 +44,10 @@
                     <tr>
                         <td>What is your favorite food?</td>
                         <td>
-                            <input type="checkbox" name="favorite_food" value="pizza"> Pizza
-                            <input type="checkbox" name="favorite_food" value="pasta"> Pasta
-                            <input type="checkbox" name="favorite_food" value="papNWors"> Pap and Wors
-                            <input type="checkbox" name="favorite_food" value="other"> Other
+                            <input type="checkbox" name="favoriteFood" value="Pizza"> Pizza
+                            <input type="checkbox" name="favoriteFood" value="Pasta"> Pasta
+                            <input type="checkbox" name="favoriteFood" value="PapNWors"> Pap and Wors
+                            <input type="checkbox" name="favoriteFood" value="Other"> Other
                         </td>
                     </tr>
                 </tbody>
@@ -68,35 +69,35 @@
                 <tbody>
                     <tr>
                         <td>I like to watch movies</td>
-                        <td><input type="radio" name="movies" value="Strongly Agree"></td>
-                        <td><input type="radio" name="movies" value="Agree"></td>
-                        <td><input type="radio" name="movies" value="Neutral"></td>
-                        <td><input type="radio" name="movies" value="Disagree"></td>
-                        <td><input type="radio" name="movies" value="Strongly Disagree"></td>
+                        <td><input type="radio" name="movies" value="1" required></td>
+                        <td><input type="radio" name="movies" value="2"></td>
+                        <td><input type="radio" name="movies" value="3"></td>
+                        <td><input type="radio" name="movies" value="4"></td>
+                        <td><input type="radio" name="movies" value="5"></td>
                     </tr>
                     <tr>
                         <td>I like to listen to the radio</td>
-                        <td><input type="radio" name="radio" value="Strongly Agree"></td>
-                        <td><input type="radio" name="radio" value="Agree"></td>
-                        <td><input type="radio" name="radio" value="Neutral"></td>
-                        <td><input type="radio" name="radio" value="Disagree"></td>
-                        <td><input type="radio" name="radio" value="Strongly Disagree"></td>
+                        <td><input type="radio" name="radio" value="1" required></td>
+                        <td><input type="radio" name="radio" value="2"></td>
+                        <td><input type="radio" name="radio" value="3"></td>
+                        <td><input type="radio" name="radio" value="4"></td>
+                        <td><input type="radio" name="radio" value="5"></td>
                     </tr>
                     <tr>
                         <td>I like to eat out</td>
-                        <td><input type="radio" name="eatOut" value="Strongly Agree"></td>
-                        <td><input type="radio" name="eatOut" value="Agree"></td>
-                        <td><input type="radio" name="eatOut" value="Neutral"></td>
-                        <td><input type="radio" name="eatOut" value="Disagree"></td>
-                        <td><input type="radio" name="eatOut" value="Strongly Disagree"></td>
+                        <td><input type="radio" name="eatOut" value="1" required></td>
+                        <td><input type="radio" name="eatOut" value="2"></td>
+                        <td><input type="radio" name="eatOut" value="3"></td>
+                        <td><input type="radio" name="eatOut" value="4"></td>
+                        <td><input type="radio" name="eatOut" value="5"></td>
                     </tr>
                     <tr>
                         <td>I like to watch TV</td>
-                        <td><input type="radio" name="tv" value="Strongly Agree"></td>
-                        <td><input type="radio" name="tv" value="Agree"></td>
-                        <td><input type="radio" name="tv" value="Neutral"></td>
-                        <td><input type="radio" name="tv" value="Disagree"></td>
-                        <td><input type="radio" name="tv" value="Strongly Disagree"></td>
+                        <td><input type="radio" name="tv" value="1" required></td>
+                        <td><input type="radio" name="tv" value="2"></td>
+                        <td><input type="radio" name="tv" value="3"></td>
+                        <td><input type="radio" name="tv" value="4"></td>
+                        <td><input type="radio" name="tv" value="5"></td>
                     </tr>
                     <tr>
                         <td colspan="6"><input type="submit" value="SUBMIT"></td>
@@ -104,5 +105,21 @@
                 </tbody>
             </table>
         </form>
+
+        <!-- ✅ Success Popup Script -->
+        <script>
+  window.onload = function () {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('success') === 'true') {
+      const popup = document.getElementById('success-popup');
+      popup.style.display = 'block';
+      setTimeout(() => {
+        popup.style.display = 'none';
+      }, 4000); // Hide after 4 seconds
+    }
+  };
+</script>
+
+
     </body>
 </html>
