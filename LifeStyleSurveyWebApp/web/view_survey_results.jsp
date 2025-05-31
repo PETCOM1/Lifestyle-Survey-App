@@ -62,15 +62,15 @@
             <tbody>
                 <tr>
                     <td>Percentage of people who like Pizza:</td>
-                    <td><%=percPizza%></td>
+                    <td><%=percPizza%>%</td>
                 </tr>
                 <tr>
                     <td>Percentage of people who like Pasta:</td>
-                    <td><%=perPasta%></td>
+                    <td><%=perPasta%>%</td>
                 </tr>
                 <tr>
                     <td>Percentage of people who like Pap and Wors:</td>
-                    <td><%=percPapNWors%></td>
+                    <td><%=percPapNWors%>%</td>
                 </tr>
             </tbody>
         </table>

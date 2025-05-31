@@ -50,7 +50,7 @@ public class SurveyFacade extends AbstractFacade<Survey> implements SurveyFacade
     @Override
     public Integer youngestPerson() {
         
-        Query query = em.createQuery("SELECT MAX(s.age) FROM Survey s");
+        Query query = em.createQuery("SELECT MIN(s.age) FROM Survey s");
         Integer age = (Integer) query.getSingleResult();
 
         
