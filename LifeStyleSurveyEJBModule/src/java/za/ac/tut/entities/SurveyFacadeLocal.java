@@ -6,6 +6,7 @@
 package za.ac.tut.entities;
 
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Local;
 
 /**
@@ -41,7 +42,7 @@ public interface SurveyFacadeLocal {
     
     double papAndWorsLikersPerc();
 
-    void avgLikeMovies();
+    ///void avgLikeMovies();
     
     double avgLikeMovie();
     
@@ -50,5 +51,7 @@ public interface SurveyFacadeLocal {
     double avgLikeEatOut();
     
     double avgLikeWatchTV();
+    
+    Map<String, Integer> countEachFavourateFood();
     
 }

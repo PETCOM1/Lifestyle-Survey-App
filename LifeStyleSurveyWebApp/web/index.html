@@ -28,6 +28,18 @@
             border-radius: 4px;
             font-size: 14px;
         }
+
+        #dob-error {
+            display: none;
+            background-color: #ffdddd;
+            color: #a94442;
+            border: 1px solid #a94442;
+            padding: 6px 10px;
+            margin-top: 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            width: fit-content;
+        }
     </style>
 </head>
 <body>
@@ -60,7 +72,10 @@
                 </tr>
                 <tr>
                     <td>Date of Birth</td>
-                    <td><input type="date" name="dob" required></td>
+                    <td>
+                      <input type="date" name="dob" required>
+                      <div id="dob-error">Age must be between 5 and 120 years.</div>
+                    </td>
                 </tr>
                 <tr>
                     <td>Contact Number</td>
@@ -95,35 +110,35 @@
             <tbody>
                 <tr>
                     <td>I like to watch movies</td>
-                    <td><input type="radio" name="movies" value="1" required></td>
-                    <td><input type="radio" name="movies" value="2"></td>
-                    <td><input type="radio" name="movies" value="3"></td>
+                    <td><input type="radio" name="movies" value="5" required></td>
                     <td><input type="radio" name="movies" value="4"></td>
-                    <td><input type="radio" name="movies" value="5"></td>
+                    <td><input type="radio" name="movies" value="3"></td>
+                    <td><input type="radio" name="movies" value="2"></td>
+                    <td><input type="radio" name="movies" value="1"></td>
                 </tr>
                 <tr>
                     <td>I like to listen to the radio</td>
-                    <td><input type="radio" name="radio" value="1" required></td>
-                    <td><input type="radio" name="radio" value="2"></td>
-                    <td><input type="radio" name="radio" value="3"></td>
+                    <td><input type="radio" name="radio" value="5" required></td>
                     <td><input type="radio" name="radio" value="4"></td>
-                    <td><input type="radio" name="radio" value="5"></td>
+                    <td><input type="radio" name="radio" value="3"></td>
+                    <td><input type="radio" name="radio" value="2"></td>
+                    <td><input type="radio" name="radio" value="1"></td>
                 </tr>
                 <tr>
                     <td>I like to eat out</td>
-                    <td><input type="radio" name="eatOut" value="1" required></td>
-                    <td><input type="radio" name="eatOut" value="2"></td>
-                    <td><input type="radio" name="eatOut" value="3"></td>
+                    <td><input type="radio" name="eatOut" value="5" required></td>
                     <td><input type="radio" name="eatOut" value="4"></td>
-                    <td><input type="radio" name="eatOut" value="5"></td>
+                    <td><input type="radio" name="eatOut" value="3"></td>
+                    <td><input type="radio" name="eatOut" value="2"></td>
+                    <td><input type="radio" name="eatOut" value="1"></td>
                 </tr>
                 <tr>
                     <td>I like to watch TV</td>
-                    <td><input type="radio" name="tv" value="1" required></td>
-                    <td><input type="radio" name="tv" value="2"></td>
-                    <td><input type="radio" name="tv" value="3"></td>
+                    <td><input type="radio" name="tv" value="5" required></td>
                     <td><input type="radio" name="tv" value="4"></td>
-                    <td><input type="radio" name="tv" value="5"></td>
+                    <td><input type="radio" name="tv" value="3"></td>
+                    <td><input type="radio" name="tv" value="2"></td>
+                    <td><input type="radio" name="tv" value="1"></td>
                 </tr>
                 <tr>
                     <td colspan="6"><input type="submit" value="SUBMIT"></td>
@@ -146,8 +161,31 @@
             }
         };
 
-        // Favorite food validation
+        // Form submit validation including age and favorite food validation
         document.querySelector("form").addEventListener("submit", function(event) {
+            const dobInput = document.querySelector('input[name="dob"]');
+            const dobError = document.getElementById('dob-error');
+            const dob = new Date(dobInput.value);
+            const today = new Date();
+
+            // Calculate age in years
+            let age = today.getFullYear() - dob.getFullYear();
+            const m = today.getMonth() - dob.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+
+            // Validate age limits
+            if (age < 5 || age > 120) {
+                dobError.style.display = 'block';
+                dobInput.focus();
+                event.preventDefault();
+                return;  // stop further validation on submit
+            } else {
+                dobError.style.display = 'none';
+            }
+
+            // Validate favorite food checkboxes
             const foodChecked = document.querySelectorAll('input[name="favoriteFood"]:checked');
             const errorPopup = document.getElementById("error-popup");
 

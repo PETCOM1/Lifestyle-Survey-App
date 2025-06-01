@@ -29,62 +29,59 @@ import za.ac.tut.entities.SurveyFacadeLocal;
  */
 public class ProcessSurvey extends HttpServlet {
 
-   
-    
-
     @EJB
-private SurveyFacadeLocal surveyFacadeLocal;
+    private SurveyFacadeLocal surveyFacadeLocal;
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-@Override
-        protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+        String fullNames = request.getParameter("fullNames");
+        String personalEmail = request.getParameter("personalEmial");
+        String dobStr = request.getParameter("dob");
+        String contactNumber = request.getParameter("contactNumber");
 
-            String fullNames = request.getParameter("fullNames");
-            String personalEmail = request.getParameter("personalEmial");
-            String dobStr = request.getParameter("dob");
-            String contactNumber = request.getParameter("contactNumber");
-            String favoriteFood = request.getParameter("favoriteFood");
+        String[] favoriteFoodsArray = request.getParameterValues("favoriteFood");
+        String favoriteFood = (favoriteFoodsArray != null) ? String.join(",", favoriteFoodsArray) : "";
 
-            // Ratings
-            Integer movies = Integer.parseInt(request.getParameter("movies"));
-            Integer radio = Integer.parseInt(request.getParameter("radio"));
-            Integer eatOut = Integer.parseInt(request.getParameter("eatOut"));
-            Integer tv = Integer.parseInt(request.getParameter("tv"));
+        Integer movies = Integer.parseInt(request.getParameter("movies"));
+        Integer radio = Integer.parseInt(request.getParameter("radio"));
+        Integer eatOut = Integer.parseInt(request.getParameter("eatOut"));
+        Integer tv = Integer.parseInt(request.getParameter("tv"));
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-    try {
-      
-        Date dob = sdf.parse(dobStr);
+        try {
+            Date dob = sdf.parse(dobStr);
+            LocalDate birthDate = dob.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate today = LocalDate.now();
+            int age = Period.between(birthDate, today).getYears();
 
-        LocalDate birthDate = dob.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate today = LocalDate.now();
-        int age = Period.between(birthDate, today).getYears();
+            // Age validation
+            if (age < 5 || age > 120) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Age must be between 5 and 120.");
+                return;
+            }
 
-        Survey survey = new Survey(
-                fullNames,
-                personalEmail,
-                dob,
-                age,
-                contactNumber,
-                favoriteFood,
-                movies,
-                radio,
-                eatOut,
-                tv
-        );
+            Survey survey = new Survey(
+                    fullNames,
+                    personalEmail,
+                    dob,
+                    age,
+                    contactNumber,
+                    favoriteFood,
+                    movies,
+                    radio,
+                    eatOut,
+                    tv
+            );
 
-        surveyFacadeLocal.create(survey);
+            surveyFacadeLocal.create(survey);
+            response.sendRedirect("index.html?success=true");
 
-        response.sendRedirect("index.html?success=true");
-
-
-
-    } catch (ParseException ex) {
-        Logger.getLogger(ProcessSurvey.class.getName()).log(Level.SEVERE, null, ex);
-        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid date format.");
+        } catch (ParseException ex) {
+            Logger.getLogger(ProcessSurvey.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid date format.");
+        }
     }
-}
 
-    
 }

@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package za.ac.tut.entities;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-/**
- *
- * @author Munzhedzi Munyadziwa Petrus
- */
 @Stateless
 public class SurveyFacade extends AbstractFacade<Survey> implements SurveyFacadeLocal {
 
@@ -29,12 +23,10 @@ public class SurveyFacade extends AbstractFacade<Survey> implements SurveyFacade
         super(Survey.class);
     }
 
-   @Override
+    @Override
     public double avarageAge() {
         Query query = em.createQuery("SELECT AVG(s.age) FROM Survey s");
         Double avg = (Double) query.getSingleResult();
-    
-        
         return (avg != null) ? avg : 0.0;
     }
 
@@ -42,85 +34,94 @@ public class SurveyFacade extends AbstractFacade<Survey> implements SurveyFacade
     public Integer oldestPeron() {
         Query query = em.createQuery("SELECT MAX(s.age) FROM Survey s");
         Integer age = (Integer) query.getSingleResult();
-
-        
         return (age != null) ? age : 0;
     }
 
     @Override
     public Integer youngestPerson() {
-        
         Query query = em.createQuery("SELECT MIN(s.age) FROM Survey s");
         Integer age = (Integer) query.getSingleResult();
-
-        
         return (age != null) ? age : 0;
     }
 
     @Override
-    public double pizzaLikersPerc() {
-        Query totalQuery = em.createQuery("SELECT COUNT(s) FROM Survey s");
-        Long total = (Long) totalQuery.getSingleResult();
+public double pizzaLikersPerc() {
+    List<Survey> surveys = em.createQuery("SELECT s FROM Survey s", Survey.class).getResultList();
+    int total = surveys.size();
+    int pizzaCount = 0;
 
-       
-        Query pizzaQuery = em.createQuery("SELECT COUNT(s) FROM Survey s WHERE s.favourateFood LIKE '%Pizza%'");
-        Long pizzaCount = (Long) pizzaQuery.getSingleResult();
-
-        if (total == 0) {
-            return 0.0;
+    for (Survey s : surveys) {
+        String foodStr = s.getFavourateFood();
+        if (foodStr != null) {
+            String[] foods = foodStr.split(",");
+            for (String food : foods) {
+                if (food.trim().equalsIgnoreCase("Pizza")) {
+                    pizzaCount++;
+                    break; // Count only once per person
+                }
+            }
         }
-
-        
-        return (pizzaCount * 100.0) / total;
     }
 
-    @Override
-    public double pastaLikersPerc() {
-        Query totalQuery = em.createQuery("SELECT COUNT(s) FROM Survey s");
-        Long total = (Long) totalQuery.getSingleResult();
+    return (total == 0) ? 0.0 : Math.round((pizzaCount * 1000.0) / total) / 10.0;
+}
 
-        Query pastaQuery = em.createQuery("SELECT COUNT(s) FROM Survey s WHERE s.favourateFood LIKE '%Pasta%'");
-        Long pastaCount = (Long) pastaQuery.getSingleResult();
+@Override
+public double pastaLikersPerc() {
+    List<Survey> surveys = em.createQuery("SELECT s FROM Survey s", Survey.class).getResultList();
+    int total = surveys.size();
+    int pastaCount = 0;
 
-        if (total == 0) {
-            return 0.0;
+    for (Survey s : surveys) {
+        String foodStr = s.getFavourateFood();
+        if (foodStr != null) {
+            String[] foods = foodStr.split(",");
+            for (String food : foods) {
+                if (food.trim().equalsIgnoreCase("Pasta")) {
+                    pastaCount++;
+                    break;
+                }
+            }
         }
-
-        return (pastaCount * 100.0) / total;
     }
 
-    @Override
-    public double papAndWorsLikersPerc() {
-   
-        Query totalQuery = em.createQuery("SELECT COUNT(s) FROM Survey s");
-        Long total = (Long) totalQuery.getSingleResult();
+    return (total == 0) ? 0.0 : Math.round((pastaCount * 1000.0) / total) / 10.0;
+}
 
-        
-        Query papWorsQuery = em.createQuery("SELECT COUNT(s) FROM Survey s WHERE s.favourateFood LIKE '%PapNWors%'");
-        Long papWorsCount = (Long) papWorsQuery.getSingleResult();
+@Override
+public double papAndWorsLikersPerc() {
+    List<Survey> surveys = em.createQuery("SELECT s FROM Survey s", Survey.class).getResultList();
+    int total = surveys.size();
+    int papWorsCount = 0;
 
-        if (total == 0) {
-            return 0.0;
+    for (Survey s : surveys) {
+        String foodStr = s.getFavourateFood();
+        if (foodStr != null) {
+            String[] foods = foodStr.split(",");
+            for (String food : foods) {
+                if (food.trim().equalsIgnoreCase("PapNWors")) {
+                    papWorsCount++;
+                    break;
+                }
+            }
         }
-
-        
-        return (papWorsCount * 100.0) / total;
     }
+
+    return (total == 0) ? 0.0 : Math.round((papWorsCount * 1000.0) / total) / 10.0;
+}
+
 
     @Override
     public double avgLikeMovie() {
         Query query = em.createQuery("SELECT AVG(s.movieRating) FROM Survey s");
         Double avg = (Double) query.getSingleResult();
-
-        
         return (avg != null) ? avg : 0.0;
-}
+    }
 
     @Override
     public double avgLikeRadio() {
         Query query = em.createQuery("SELECT AVG(s.radioRating) FROM Survey s");
         Double avg = (Double) query.getSingleResult();
-
         return (avg != null) ? avg : 0.0;
     }
 
@@ -128,7 +129,6 @@ public class SurveyFacade extends AbstractFacade<Survey> implements SurveyFacade
     public double avgLikeEatOut() {
         Query query = em.createQuery("SELECT AVG(s.eatOutRating) FROM Survey s");
         Double avg = (Double) query.getSingleResult();
-
         return (avg != null) ? avg : 0.0;
     }
 
@@ -136,14 +136,28 @@ public class SurveyFacade extends AbstractFacade<Survey> implements SurveyFacade
     public double avgLikeWatchTV() {
         Query query = em.createQuery("SELECT AVG(s.watchTvRating) FROM Survey s");
         Double avg = (Double) query.getSingleResult();
-
         return (avg != null) ? avg : 0.0;
     }
 
     @Override
-    public void avgLikeMovies() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public Map<String, Integer> countEachFavourateFood() {
+        Query query = em.createQuery("SELECT s.favourateFood FROM Survey s");
+        List<String> allFoods = query.getResultList();
 
-    
+        Map<String, Integer> foodCountMap = new HashMap<>();
+
+        for (String foodListStr : allFoods) {
+            if (foodListStr != null && !foodListStr.trim().isEmpty()) {
+                String[] foods = foodListStr.split(",");
+                for (String food : foods) {
+                    String trimmedFood = food.trim();
+                    if (!trimmedFood.isEmpty()) {
+                        foodCountMap.put(trimmedFood, foodCountMap.getOrDefault(trimmedFood, 0) + 1);
+                    }
+                }
+            }
+        }
+
+        return foodCountMap;
+    }
 }
